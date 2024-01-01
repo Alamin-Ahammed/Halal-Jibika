@@ -1,14 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useThemeContext } from "../../Context/themeContext";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  serverTimestamp,
+  getDocs,
+} from "firebase/firestore";
 import "./Jobs.css";
 import { db } from "../../config/firebase-config";
 import { toast } from "react-toastify";
 import Cookies from "universal-cookie";
+import JobCard from "../../Components/JobCard/JobCard";
 
 export default function Jobs() {
   const { theme, setTheme } = useThemeContext();
   const [isPostClicked, setIsPostClicked] = useState(false);
+  const [allJobs, setAllJobs] = useState([]);
+  const {companyLogo,jobPosition,Authoruid,jobTitle,companyName,jobDescription,timestamp,createdAt,Authoremail} = allJobs;
 
   const handlePostJob = () => {
     setIsPostClicked(!isPostClicked);
@@ -16,7 +24,7 @@ export default function Jobs() {
 
   const handleJobPostSubmition = async (e) => {
     const cookies = new Cookies();
-    const {uid,email} = cookies.get("authInfo");
+    const { uid, email } = cookies.get("authInfo");
     e.preventDefault();
     const job = {
       jobTitle: e.target.jobTitle.value,
@@ -41,7 +49,8 @@ export default function Jobs() {
           createdAt: Date.now(),
           timestamp: serverTimestamp(),
         });
-        toast.success('Job posted successfully!')
+        toast.success("Job posted successfully!");
+        setIsPostClicked(!isPostClicked);
         // clear form
         e.target.reset();
         console.log("Document written with ID: ", docRef.id);
@@ -51,7 +60,19 @@ export default function Jobs() {
     }
   };
 
-  
+  useEffect(() => {
+    const allJobsRef = collection(db, "allJobs");
+    async function getJobCollections() {
+      const querySnapshot = await getDocs(allJobsRef);
+      const jobs = [];
+      querySnapshot.forEach((doc) => {
+        jobs.push(doc.data())
+      });
+      setAllJobs(jobs)
+      console.log(jobs)
+    }
+    getJobCollections();
+  }, [isPostClicked]);
 
   return (
     <div
@@ -97,9 +118,11 @@ export default function Jobs() {
       <div className="all-jobs-container">
         <h1>All Jobs</h1>
         <div className="jobCards">
-          <div className="jobCard">
-
-          </div>
+          {
+            allJobs.map((job) => (
+              <JobCard key={job.createdAt} jobData={job} />
+            ))
+          }
         </div>
       </div>
     </div>
