@@ -1,0 +1,64 @@
+.post-jobs-container {
+    align-self: flex-start;
+    flex: 1 1 320px;
+}
+
+.post-jobs-container button {
+    font-size: 0.9rem;
+}
+
+.all-jobs-container {
+    flex: 1 1 600px;
+}
+
+/* JobForm.css */
+
+.form-container {
+    width: clamp(200px, 40vw, 320px);
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    transform: scale(0.7);
+    position: relative;
+    left: -30px;
+    top: -71px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  
+  input,
+  select,
+  textarea {
+    padding: 8px;
+    margin: 5px 0 15px 0;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  button {
+    background-color: #f58020;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+
+  .post-job {
+    position: relative;
+    left: 1.4rem;
+  }
+  
+  button:hover {
+    background-color: #e16b1a;
+  }
+  

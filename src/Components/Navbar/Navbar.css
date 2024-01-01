@@ -1,0 +1,133 @@
+.navbar-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.4rem;
+    background-color: #15365b;
+    max-width: 1200px;
+    margin-inline: auto;
+}
+
+.logo {
+    width: 90px;
+    cursor: pointer;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+    padding: 0.5rem 1rem;
+    display: inline-flex;
+    border-radius: 0.5rem;
+}
+
+.navbar button {
+    background-color: #f58020;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    transition: all 0.3s;
+}
+
+.navbar button:hover {
+    background-color: #07213e;
+}
+
+.profile-container h6 {
+    text-align: center;
+}
+
+.signoutBtn {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.9rem;
+}
+
+.profile {
+    max-width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 1px solid #f58020;
+}
+
+.profile > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.profile > img:hover {
+    border: 5px solid #f58020;
+    border-radius: 50%;
+}
+
+.navbar  a:hover {
+    background-color: #07213e;
+    color: #f58020;
+}
+
+.active{
+    color: #f58020 !important;
+    background-color: #07213e;
+}
+
+.bars-icon {
+    display: none;
+    align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+    .navbar-container {
+        padding-inline: 2rem;
+    }
+    .navbar {
+        position: relative;
+    }
+    .navLinks {
+        background-color: #07213e;
+        display: none;
+        position: absolute;
+        top: 4rem;
+        right: -1rem;
+        animation: animate 0.2s linear;
+        transition: all 0.2s;
+        height: 250px;
+        overflow: hidden;
+        border-radius: 0.5rem;
+        text-align: center;
+        padding: 1rem 2rem;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+
+    .navLinks > * :hover {
+        background-color: #f58020;
+        color: white;
+        padding: 1rem 2rem;
+    }
+
+    @keyframes animate {
+        0%{
+            height: 0;
+        }
+        100%{
+            height: 250px;
+        }
+    }
+
+    .bars-icon {
+        display: flex;
+    }
+    
+}

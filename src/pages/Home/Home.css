@@ -1,0 +1,160 @@
+.hero-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8rem;
+}
+
+.banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+  text-align: center;
+  color: #fff; 
+}
+
+.banner-img {
+  width: clamp(300px, 50vw, 483px);
+}
+
+.banner h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin-bottom: 10px;
+  color: #4BB543;
+}
+
+.banner p {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  margin-bottom: 20px;
+}
+
+
+
+.explore-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-size: 1.2em;
+  border: 2px solid #15365b;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.explore-btn:hover {
+  color: #fff !important; 
+  background-color: #f58020 !important; 
+  border: 2px solid #f58020;
+}
+
+.latest-job {
+  padding: clamp(8px, 5vw, 20px);
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.latest-job h1 {
+  color: #fff;
+  font-size: clamp(0.9rem,5vw,2rem);
+  margin-bottom: clamp(5px, 2vw, 10px);
+}
+
+.latest-job p {
+  color: #777;
+  font-size: clamp(0.8rem, 2vw, 1rem);
+  margin-bottom: clamp(8px, 5vw, 20px);;
+}
+
+.latest-job div {
+  margin-top: clamp(8px, 5vw, 20px);;
+}
+
+.latest-job h1, .latest-job h6 {
+  margin-bottom: clamp(5px, 2vw, 10px);
+}
+
+.latest-job button {
+  background-color: #4BB543;
+  color: #fff;
+  padding: clamp(2px, 1.5vw, 10px) clamp(3px, 3vw, 20px);
+  font-size: clamp(0.6rem, 1.2vw, 1rem);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.latest-job button:hover {
+  background-color: #348c2e;
+}
+
+.heading {
+  text-align: center;
+}
+
+.heading h1 {
+  color: #4BB543;
+  font-size: clamp(1.5rem, 4vw, 2.3rem);
+}
+
+.heading p {
+  color: #fff;
+  font-size: clamp(0.8rem, 2vw, 1.2rem);
+}
+
+.newJobs-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.3rem, 1vw, 1rem);
+  justify-content: space-around;
+}
+
+.newJobs-details {
+  max-width: 500px;
+}
+
+.newJobs-details h1 {
+  color: #fff;
+  font-size: clamp(0.9rem, 2vw, 1.4rem);
+}
+
+.newJobs-details h5 {
+  color: #c1c0c0;
+  font-size: clamp(0.7rem, 1.5vw, 1rem);
+  max-width: 400px;
+}
+
+.newJobs-explore-all-btn {
+  display: flex;
+  justify-content: center;
+  margin: clamp(1.5rem, 5vw, 4rem) 0;
+}
+
+.newJobs-explore-all-btn button {
+  padding: clamp(0.1rem, 1vw, 0.5rem) clamp(0.5rem, 2vw, 1rem);
+}
+
+.posted-time {
+  font-size: 0.9rem;
+  color: #f58020;
+}
+
+
+@media screen and (max-width: 768px) {
+  .hero-container {
+    flex-direction: column-reverse;
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+  .newJobs-details {
+    max-width: 200px;
+  }
+  .banner {
+    height: fit-content;
+  }
+  .posted-time {
+    font-size: clamp(0.5rem, 1vw, 0.8rem);
+  }
+}
