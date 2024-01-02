@@ -38,7 +38,7 @@ export default function Favorite() {
 
   return (
     <div className="favorite-container" style={{background: '#15365b', minHeight: "70.8vh"}} onLoad={ThemeChanger("favorite-container","className")}>
-        <h1>Favorite</h1>
+        <h1>My Favorites</h1>
         <div className="jobCards">
           {
             myFavourites.sort((a,b) => b.createdAt - a.createdAt).map((job) =>  (
