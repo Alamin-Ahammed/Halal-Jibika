@@ -2,8 +2,30 @@ import "./Home.css";
 import hero from "../../assets/heroImage.webp";
 import { Link } from "react-router-dom";
 import { useThemeContext } from "../../Context/themeContext";
+import { useEffect, useState } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../config/firebase-config";
+import LatestJobs from "../../Components/LatestJobs/LatestJobs";
 export default function Home() {
   const { theme } = useThemeContext();
+  const [latestJob, setLatestJob] = useState([]);
+
+  useEffect(() => {
+    const allJobsRef = collection(db, "allJobs");
+    async function getJobCollections() {
+      const querySnapshot = await getDocs(allJobsRef);
+      const jobs = [];
+      querySnapshot.forEach((doc) => {
+        jobs.push(doc.data());
+      });
+      const fiveLatestJobs = jobs
+        .sort((a = 0, b = 0) => b.createdAt - a.createdAt)
+        .slice(0, 5);
+      setLatestJob([...fiveLatestJobs]);
+    }
+    getJobCollections();
+  }, []);
+
   return (
     <div
       style={{
@@ -39,17 +61,9 @@ export default function Home() {
         <div className="all-new-jobs">
           <div>
             <div className="newJobs-container">
-              <div className="newJobs-details">
-            <i className="posted-time">Posted: 12s ago</i>
-                <h1>Latest Jobs 1</h1>
-                <h5>
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.amet
-                  consectetur adipisicing elit.
-                </h5>
-              </div>
-              <div>
-                <button>See Details</button>
-              </div>
+              {latestJob.map((job) => {
+                return <LatestJobs key={job.createdAt} jobData={{...job}} />;
+              })}
             </div>
           </div>
 

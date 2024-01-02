@@ -7,19 +7,23 @@ import Cookies from "universal-cookie";
 import MyFavCard from "../../Components/MyFavCard/MyFavCard";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useIsLoggedInContext } from "../../Context/IsLoggedInContext";
 
 export default function Favorite() {
   const navigate = useNavigate();
   const [myFavourites, setMyFavourites] = useState([]);
   const cookies = new Cookies();
   const [isDeleteClicked, setIsDeleteClicked] = useState(false);
-
-  useEffect(()=> {
-    toast.warning('Login At first to see Favourites', {autoClose: 1000})
-    myFavourites.length ===0 && navigate("/signin", { replace: true })
-  },[])
+  const { isSingedIn } = useIsLoggedInContext();
 
   useEffect(() => {
+    if (!isSingedIn) {
+      toast.warning("Please login first",{autoClose:1000});
+      navigate("/signin");
+    } else {
+      collectData();
+    }
+    
     async function collectData() {
       try {
         const collectionRef = collection(db, "favourites");
@@ -43,13 +47,12 @@ export default function Favorite() {
         console.log(error);
       }
     }
-
-    collectData();
+    
   }, [isDeleteClicked]);
 
   return (
     <>
-      {myFavourites.length > 0 && (
+      {isSingedIn ? (
         <div
           className="favorite-container"
           style={{ background: "#15365b", minHeight: "70.8vh" }}
@@ -68,6 +71,8 @@ export default function Favorite() {
               ))}
           </div>
         </div>
+      ) : (
+        <h1>No Favourites Added Yet!</h1>
       )}
     </>
   );

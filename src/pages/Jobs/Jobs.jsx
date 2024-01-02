@@ -68,7 +68,6 @@ export default function Jobs() {
         setIsPostClicked(!isPostClicked);
         // clear form
         e.target.reset();
-        console.log("Document written with ID: ", docRef.id);
       } catch (e) {
         console.error("Error adding document: ", e);
       }
@@ -92,6 +91,7 @@ export default function Jobs() {
 
   useEffect(() => {
     if (!isSingedIn) {
+      toast.warning("Please login first",{autoClose:1000});
       navigate("/signin");
     }
   }, [isSingedIn]);
