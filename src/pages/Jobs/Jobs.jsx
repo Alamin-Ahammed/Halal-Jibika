@@ -12,11 +12,13 @@ import Cookies from "universal-cookie";
 import JobCard from "../../Components/JobCard/JobCard";
 import "./Jobs.css";
 import { useIsLoggedInContext } from "../../Context/IsLoggedInContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Jobs() {
   const { theme, setTheme } = useThemeContext();
   const { isSingedIn, setIsSingedIn } = useIsLoggedInContext();
   const [isPostClicked, setIsPostClicked] = useState(false);
+  const navigate = useNavigate();
   const [allJobs, setAllJobs] = useState([]);
   const {
     companyLogo,
@@ -95,9 +97,13 @@ export default function Jobs() {
       className="jobs-main-container"
     >
       <div className="post-jobs-container">
-        <button className="post-job" onClick={handlePostJob}>
-          Post A Job
-        </button>
+        {isSingedIn ? (
+          <button className="post-job" onClick={handlePostJob}>
+            Post A Job
+          </button>
+        ) : (
+          navigate("/signin")
+        )}
         {isPostClicked && (
           <div className="form-container">
             <form onSubmit={handleJobPostSubmition}>
