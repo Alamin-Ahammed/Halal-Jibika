@@ -83,10 +83,15 @@ export default function Jobs() {
         jobs.push(doc.data());
       });
       setAllJobs(jobs);
-      console.log(jobs);
     }
     getJobCollections();
   }, [isPostClicked]);
+
+  useEffect(()=> {
+    if (!isSingedIn) {
+    navigate("/signin")
+    }
+  },[isSingedIn])
 
   return (
     <div
@@ -102,7 +107,7 @@ export default function Jobs() {
             Post A Job
           </button>
         ) : (
-          navigate("/signin")
+          'Login to Post A Job!'
         )}
         {isPostClicked && (
           <div className="form-container">
