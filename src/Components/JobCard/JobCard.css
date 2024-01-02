@@ -19,15 +19,16 @@
 .favIcon {
     font-size: 2rem;
     cursor: pointer;
-    color: rgba(184, 15, 15,0.8);
+    color: rgba(136, 26, 26, 0.8);
     transition: all 0.3s;
     border-radius: 50%;
 }
 
 .favIcon:hover {
-    color: red;
+    color: red !important; 
     background: rgba(255, 0, 0,0.1);
-    box-shadow: rgba(184, 15, 15,0.8) 0px 8px 24px;
+    /* box-shadow: rgba(184, 15, 15,1) 0px 8px 24px !important; */
+    box-shadow: rgb(225, 11, 11) 0px 8px 24px !important;
 }
 
 .imgAndTitle > h2 {

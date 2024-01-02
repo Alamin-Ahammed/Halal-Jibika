@@ -20,17 +20,18 @@ export default function Jobs() {
   const [isPostClicked, setIsPostClicked] = useState(false);
   const navigate = useNavigate();
   const [allJobs, setAllJobs] = useState([]);
-  const {
-    companyLogo,
-    jobPosition,
-    Authoruid,
-    jobTitle,
-    companyName,
-    jobDescription,
-    timestamp,
-    createdAt,
-    Authoremail,
-  } = allJobs;
+  const [isNeedRender, setIsNeedRender] = useState(false);
+  // const {
+  //   companyLogo,
+  //   jobPosition,
+  //   Authoruid,
+  //   jobTitle,
+  //   companyName,
+  //   jobDescription,
+  //   timestamp,
+  //   createdAt,
+  //   Authoremail,
+  // } = allJobs;
 
   const handlePostJob = () => {
     setIsPostClicked(!isPostClicked);
@@ -63,7 +64,7 @@ export default function Jobs() {
           createdAt: Date.now(),
           timestamp: serverTimestamp(),
         });
-        toast.success("Job posted successfully!");
+        toast.success("Job posted successfully!",{autoClose:1000});
         setIsPostClicked(!isPostClicked);
         // clear form
         e.target.reset();
@@ -72,6 +73,8 @@ export default function Jobs() {
         console.error("Error adding document: ", e);
       }
     }
+    
+    setIsNeedRender(!isNeedRender);
   };
 
   useEffect(() => {
@@ -87,11 +90,11 @@ export default function Jobs() {
     getJobCollections();
   }, []);
 
-  useEffect(()=> {
+  useEffect(() => {
     if (!isSingedIn) {
-    navigate("/signin")
+      navigate("/signin");
     }
-  },[isSingedIn])
+  }, [isSingedIn]);
 
   return (
     <div
@@ -107,7 +110,7 @@ export default function Jobs() {
             Post A Job
           </button>
         ) : (
-          'Login to Post A Job!'
+          "Login to Post A Job!"
         )}
         {isPostClicked && (
           <div className="form-container">
@@ -142,9 +145,18 @@ export default function Jobs() {
       >
         <h1>All Jobs</h1>
         <div className="jobCards">
-          {allJobs.sort((a, b) => b.createdAt - a.createdAt).map((job) => (
-            <JobCard key={job.createdAt} jobData={{...job,uniqueID: auth.currentUser.uid+job.createdAt}} />
-          ))}
+          {allJobs.length > 0 &&
+            allJobs
+              .sort((a = 0, b = 0) => b.createdAt - a.createdAt)
+              .map((job) => (
+                <JobCard
+                  key={job.createdAt}
+                  jobData={{
+                    ...job,
+                    uniqueID: auth.currentUser.uid + job.createdAt,
+                  }}
+                />
+              ))}
         </div>
       </div>
     </div>

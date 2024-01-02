@@ -23,11 +23,12 @@ export default function JobCard({ jobData }) {
     uniqueID,
     Authoremail,
   } = jobData;
+  const [isFavIconClicked,setIsFavIconClicked] = useState(false);
   const [favourites, setfavourites] = useState([]);
   const { theme } = useThemeContext();
   const navigate = useNavigate();
 
-  function getLocalTimeFromSeconds(seconds) {
+  function getLocalTimeFromSeconds(seconds=0) {
     const time = new Date(seconds * 1000);
     time.toISOString(seconds * 1000);
     const postDateTime =
@@ -69,7 +70,7 @@ export default function JobCard({ jobData }) {
     }
 
     collectData();
-  }, [favourites]);
+  }, [isFavIconClicked]);
 
   return (
     <div>
@@ -98,13 +99,10 @@ export default function JobCard({ jobData }) {
                   uniqueID: auth.currentUser.uid + createdAt,
                   Authoremail,
                 });
+                setIsFavIconClicked(!isFavIconClicked)
               }}
               className="favIcon"
-              style={{
-                color: favourites.find((fav) => fav.uniqueID === uniqueID)
-                  ? "red"
-                  : "black",
-              }}
+              style={favourites.find((fav) => fav.uniqueID === uniqueID) ? {color:'red',boxShadow: 'rgba(184, 15, 15,0.7) 0px 8px 24px'} : {color:'rgba(90, 26, 26, 0.8)'}}
             />
           </div>
         </div>

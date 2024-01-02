@@ -41,7 +41,7 @@ const SignUp = () => {
       await sendEmailVerification(auth.currentUser);
       toast.warning(
         "Verification email has been sent! you have 30 seconds to verify, otherwise account will be deleted.",
-        { autoclose: 3000 }
+        { autoclose: 1200 }
       );
 
       // storing image and giving photoURL
@@ -91,7 +91,7 @@ const SignUp = () => {
               cookies.set("authInfo", { displayName, email, photoURL, uid });
               clearInterval(reNavigate);
               setIsSingedIn(true);
-              navigate("/jobs");
+              navigate("/");
             }
           }
         );
