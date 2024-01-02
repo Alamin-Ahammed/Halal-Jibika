@@ -85,7 +85,7 @@ export default function Jobs() {
       setAllJobs(jobs);
     }
     getJobCollections();
-  }, [isPostClicked]);
+  }, []);
 
   useEffect(()=> {
     if (!isSingedIn) {

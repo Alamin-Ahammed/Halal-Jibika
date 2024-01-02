@@ -1,14 +1,15 @@
 import { initializeApp } from "firebase/app";
+import {getAuth} from "firebase/auth"
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
-import { getAuth } from "firebase/auth";
+
 const firebaseConfig = {
-  apiKey: "AIzaSyCVwlCzUFcKFC1DWgnnywmpibcqWYb7DZo",
-  authDomain: "halal-jibika-ahammed.firebaseapp.com",
-  projectId: "halal-jibika-ahammed",
-  storageBucket: "halal-jibika-ahammed.appspot.com",
-  messagingSenderId: "929505315241",
-  appId: "1:929505315241:web:2c40cdc26696b329321cb8"
+  apiKey: "AIzaSyCski20Y-kR9F0wBrMtux-LpBgLD0ACJDo",
+  authDomain: "halal-jibika-ahammed-b1db6.firebaseapp.com",
+  projectId: "halal-jibika-ahammed-b1db6",
+  storageBucket: "halal-jibika-ahammed-b1db6.appspot.com",
+  messagingSenderId: "167328258584",
+  appId: "1:167328258584:web:982382639f394b70e7416d"
 };
 
 // Initialize Firebase
