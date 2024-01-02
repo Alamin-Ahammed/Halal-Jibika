@@ -23,12 +23,13 @@ export default function JobCard({ jobData }) {
     uniqueID,
     Authoremail,
   } = jobData;
+
   const [isFavIconClicked,setIsFavIconClicked] = useState(false);
   const [favourites, setfavourites] = useState([]);
   const { theme } = useThemeContext();
   const navigate = useNavigate();
 
-  function getLocalTimeFromSeconds(seconds=0) {
+  function getLocalTimeFromSeconds(seconds) {
     const time = new Date(seconds * 1000);
     time.toISOString(seconds * 1000);
     const postDateTime =
@@ -93,7 +94,7 @@ export default function JobCard({ jobData }) {
                   jobTitle,
                   companyName,
                   jobDescription,
-                  createdAtDateTime: getLocalTimeFromSeconds(timestamp.seconds),
+                  createdAtDateTime: getLocalTimeFromSeconds((timestamp.seconds)||0),
                   createdAt,
                   favUserUID: auth.currentUser.uid,
                   uniqueID: auth.currentUser.uid + createdAt,
@@ -107,7 +108,7 @@ export default function JobCard({ jobData }) {
           </div>
         </div>
         <div className="extraDetails">
-          <small>Posted At: {getLocalTimeFromSeconds(timestamp.seconds)}</small>
+          <small>Posted At: {getLocalTimeFromSeconds((timestamp.seconds || 0))}</small>
           <p>Company Name: {companyName}</p>
           <p>Job Position: {jobPosition}</p>
           <div className="detailsBtn">

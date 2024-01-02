@@ -1,0 +1,18 @@
+.jobCards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(340px, 1fr));
+    grid-auto-rows: 1fr;
+    grid-gap: 20px;
+    padding: 20px;
+  }
+
+.favorite-container h1 {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.faTrash {
+    color: #f58020;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
