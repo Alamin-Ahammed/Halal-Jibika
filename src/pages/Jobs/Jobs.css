@@ -1,28 +1,32 @@
+.jobs-main-container {
+  display: "flex";
+  align-items: "center";
+  justify-content: "center";
+  flex-direction: column;
+}
+
 .post-jobs-container {
     align-self: flex-start;
-    flex: 1 1 320px;
+    flex-grow: 1;
 }
 
 .post-jobs-container button {
     font-size: 0.9rem;
 }
 
-.all-jobs-container {
-    flex: 1 1 600px;
-}
-
 /* JobForm.css */
 
 .form-container {
-    width: clamp(200px, 40vw, 320px);
+    width: 320px;
     padding: 20px;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
     transform: scale(0.7);
-    position: relative;
-    left: -30px;
-    top: -71px;
+    position: absolute;
+    left: -25px;
+    top: 2.4rem;
+    z-index: 11;
   }
   
   form {
@@ -61,4 +65,29 @@
   button:hover {
     background-color: #e16b1a;
   }
+
+  .all-jobs-container{
+    flex-grow: 12;
+  }
+
+  .all-jobs-container h1 {
+    text-align: center;
+  }
   
+  .jobCards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(320px, 1fr));
+    grid-auto-rows: 1fr;
+    grid-gap: 20px;
+    padding: 20px;
+  }
+
+
+  @media screen and (min-width: 768px) {
+    .all-jobs-container {
+      margin-top: 1rem;
+    }
+    .form-container {
+      width: 400px;
+    }
+  }

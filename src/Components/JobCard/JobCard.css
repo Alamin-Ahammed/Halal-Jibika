@@ -1,0 +1,67 @@
+.jobCard {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    height: fit-content;
+    overflow: hidden;
+    padding: 0.5rem;
+    background-color: rgba(0, 0, 0,0.1);
+}
+
+.imgAndTitle {
+    gap:  0.5rem;
+}
+
+.imgAndTitle , .imgAndTitleFav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.favIcon {
+    font-size: 2rem;
+    cursor: pointer;
+    color: rgb(184, 15, 15);
+    transition: all 0.3s;
+    border-radius: 50%;
+}
+
+.favIcon:hover {
+    color: red;
+    background: rgba(255, 0, 0,0.1);
+    box-shadow: rgba(184, 15, 15,0.8) 0px 8px 24px;
+}
+
+.imgAndTitle > h2 {
+    font-size: clamp(0.6rem, 9vw, 1.4rem);
+}
+
+.imgAndTitle img{
+    max-width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.extraDetails > *{
+    text-align: left;
+    padding-left: 1rem;
+    line-height: 0.7;
+}
+
+.detailsBtn {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 0 0.5rem 0;
+}
+
+.detailsBtn > button {
+    background-color: #4BB543;
+}
+
+.detailsBtn > button:hover {
+    background-color: #2b7926;
+}
+
+/* .jobDescription {
+    height: 40px;
+} */

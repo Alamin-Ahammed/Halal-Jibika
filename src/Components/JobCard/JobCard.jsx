@@ -1,4 +1,8 @@
 import React from "react";
+import { MdFavorite } from "react-icons/md";
+import "./JobCard.css";
+import { ThemeChanger } from "../../CustomHooks/ThemeChanger";
+import { useThemeContext } from "../../Context/themeContext";
 
 export default function JobCard({ jobData }) {
   const {
@@ -12,6 +16,7 @@ export default function JobCard({ jobData }) {
     createdAt,
     Authoremail,
   } = jobData;
+  const {theme} = useThemeContext()
 
   function getLocalTimeFromSeconds(seconds) {
     const time = new Date(seconds * 1000);
@@ -28,15 +33,30 @@ export default function JobCard({ jobData }) {
   }
   return (
     <div>
-      <div className="jobCard">
-        <h2>{jobTitle}</h2>
-        <img src={companyLogo} alt="Company Logo" />
-        <p>{companyName}</p>
-        <p>{jobPosition}</p>
-        <p>{jobDescription}</p>
-        <p>{Authoremail}</p>
-        <p>{getLocalTimeFromSeconds(timestamp.seconds)}</p>
+      <div className="jobCard" style={{color: theme === 'dark' ? '#fff' : '#000'}}>
+        <div className="imgAndTitleFav">
+          <div className="imgAndTitle">
+            <img src={companyLogo} alt="Company Logo" />
+            <h2>{jobTitle}</h2>
+          </div>
+          <MdFavorite className="favIcon" />
+        </div>
+        <div className="extraDetails">
+          <p>Company Name: {companyName}</p>
+          <p>Job Position: {jobPosition}</p>
+          <p>{getLocalTimeFromSeconds(timestamp.seconds)}</p>
+          <div className="detailsBtn">
+            <button>Apply Now</button>
+            <button>See Details</button>
+          </div>
+        </div>
       </div>
     </div>
   );
 }
+
+/**
+ * 
+        <p className="jobDescription">Job Description: {jobDescription}</p>
+        <p>Author Email: {Authoremail}</p>
+ */

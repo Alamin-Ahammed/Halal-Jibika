@@ -44,8 +44,8 @@
   button {
     background-color: #4BB543;
     color: #fff;
-    padding: 10px 20px;
-    font-size: 1.2em;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
     border: none;
     border-radius: 5px;
     cursor: pointer;

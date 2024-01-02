@@ -6,17 +6,29 @@ import {
   serverTimestamp,
   getDocs,
 } from "firebase/firestore";
-import "./Jobs.css";
 import { db } from "../../config/firebase-config";
 import { toast } from "react-toastify";
 import Cookies from "universal-cookie";
 import JobCard from "../../Components/JobCard/JobCard";
+import "./Jobs.css";
+import { useIsLoggedInContext } from "../../Context/IsLoggedInContext";
 
 export default function Jobs() {
   const { theme, setTheme } = useThemeContext();
+  const { isSingedIn, setIsSingedIn } = useIsLoggedInContext();
   const [isPostClicked, setIsPostClicked] = useState(false);
   const [allJobs, setAllJobs] = useState([]);
-  const {companyLogo,jobPosition,Authoruid,jobTitle,companyName,jobDescription,timestamp,createdAt,Authoremail} = allJobs;
+  const {
+    companyLogo,
+    jobPosition,
+    Authoruid,
+    jobTitle,
+    companyName,
+    jobDescription,
+    timestamp,
+    createdAt,
+    Authoremail,
+  } = allJobs;
 
   const handlePostJob = () => {
     setIsPostClicked(!isPostClicked);
@@ -66,10 +78,10 @@ export default function Jobs() {
       const querySnapshot = await getDocs(allJobsRef);
       const jobs = [];
       querySnapshot.forEach((doc) => {
-        jobs.push(doc.data())
+        jobs.push(doc.data());
       });
-      setAllJobs(jobs)
-      console.log(jobs)
+      setAllJobs(jobs);
+      console.log(jobs);
     }
     getJobCollections();
   }, [isPostClicked]);
@@ -79,10 +91,8 @@ export default function Jobs() {
       style={{
         background: theme === "dark" ? "#15365b" : "#fff",
         minHeight: "70.8vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
       }}
+      className="jobs-main-container"
     >
       <div className="post-jobs-container">
         <button className="post-job" onClick={handlePostJob}>
@@ -115,14 +125,15 @@ export default function Jobs() {
           </div>
         )}
       </div>
-      <div className="all-jobs-container">
+      <div
+        className="all-jobs-container"
+        style={{ color: theme === "dark" ? "#fff" : "#000" }}
+      >
         <h1>All Jobs</h1>
         <div className="jobCards">
-          {
-            allJobs.map((job) => (
-              <JobCard key={job.createdAt} jobData={job} />
-            ))
-          }
+          {allJobs.map((job) => (
+            <JobCard key={job.createdAt} jobData={job} />
+          ))}
         </div>
       </div>
     </div>
