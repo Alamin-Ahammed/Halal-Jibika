@@ -8,6 +8,7 @@ import Favorite from "../pages/Favorite/Favorite";
 import NotFound from "../pages/NotFound/NotFound";
 import SignUp from "../pages/Sign-Up/SingUp";
 import SignIn from "../pages/SignIn/SignIn";
+import ShowDetailsOfAJob from "../pages/ShowDetailsOfAJob/ShowDetailsOfAJob";
 
 export const routes = createBrowserRouter([
     {
@@ -42,6 +43,10 @@ export const routes = createBrowserRouter([
                 path: 'signin',
                 element: <SignIn />
             },
+            {
+                path: 'ShowDetailsOfAJob',
+                element: <ShowDetailsOfAJob />
+            }
         ]
     },
     {

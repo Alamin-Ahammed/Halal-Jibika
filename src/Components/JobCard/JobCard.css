@@ -19,7 +19,7 @@
 .favIcon {
     font-size: 2rem;
     cursor: pointer;
-    color: rgb(184, 15, 15);
+    color: rgba(184, 15, 15,0.8);
     transition: all 0.3s;
     border-radius: 50%;
 }
@@ -31,7 +31,8 @@
 }
 
 .imgAndTitle > h2 {
-    font-size: clamp(0.6rem, 9vw, 1.4rem);
+    font-size: clamp(0.6rem, 4vw, 1.4rem);
+    text-wrap: nowrap;
 }
 
 .imgAndTitle img{
@@ -44,6 +45,11 @@
     text-align: left;
     padding-left: 1rem;
     line-height: 0.7;
+}
+
+.extraDetails > small {
+    margin-top: 0.5rem;
+    display: block;
 }
 
 .detailsBtn {

@@ -6,7 +6,7 @@ import {
   serverTimestamp,
   getDocs,
 } from "firebase/firestore";
-import { db } from "../../config/firebase-config";
+import { auth, db } from "../../config/firebase-config";
 import { toast } from "react-toastify";
 import Cookies from "universal-cookie";
 import JobCard from "../../Components/JobCard/JobCard";
@@ -142,8 +142,8 @@ export default function Jobs() {
       >
         <h1>All Jobs</h1>
         <div className="jobCards">
-          {allJobs.map((job) => (
-            <JobCard key={job.createdAt} jobData={job} />
+          {allJobs.sort((a, b) => b.createdAt - a.createdAt).map((job) => (
+            <JobCard key={job.createdAt} jobData={{...job,uniqueID: auth.currentUser.uid+job.createdAt}} />
           ))}
         </div>
       </div>

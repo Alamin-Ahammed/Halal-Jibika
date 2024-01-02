@@ -19,6 +19,7 @@ const SignIn = () => {
 signInWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
     const user = userCredential.user;
+    console.log(user)
     const {displayName,email,photoURL,uid} = user;
     cookies.set('authInfo', {displayName,email,photoURL,uid});
     toast.success('Sign in successful!')
