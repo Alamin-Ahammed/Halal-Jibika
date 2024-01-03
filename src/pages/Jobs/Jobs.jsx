@@ -57,12 +57,14 @@ export default function Jobs() {
       job.jobDescription
     ) {
       try {
+        const createAtMiliSec = Date.now();
         const docRef = await addDoc(collection(db, "allJobs"), {
           ...job,
           Authoruid: uid,
           Authoremail: email,
-          createdAt: Date.now(),
+          createdAt: createAtMiliSec,
           timestamp: serverTimestamp(),
+          uniqueID: auth.currentUser.uid+createAtMiliSec,
         });
         toast.success("Job posted successfully!",{autoClose:1000});
         setIsPostClicked(!isPostClicked);
@@ -87,7 +89,7 @@ export default function Jobs() {
       setAllJobs(jobs);
     }
     getJobCollections();
-  }, []);
+  }, [isPostClicked]);
 
   useEffect(() => {
     if (!isSingedIn) {
