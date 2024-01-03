@@ -1,8 +1,10 @@
 import React from "react";
 import { TimeDelayCalculation } from "../../CustomHooks/TimeDelayCalculation";
 import './LatestJobs.css'
+import { useNavigate } from "react-router-dom";
 
 export default function LatestJobs({ jobData }) {
+  const navigate = useNavigate();
   const {
     createdAt,
     companyLogo,
@@ -11,6 +13,10 @@ export default function LatestJobs({ jobData }) {
     jobTitle,
     jobDescription,
   } = jobData;
+
+  const handleSeeDetails = (CurrentJobDetail) => {
+    navigate("/ShowDetailsOfAJob", { replace: true, state: { jobData } });
+  };
   return (
     <div className="latestJobsParent">
       <div className="newJobs-details">
@@ -22,7 +28,7 @@ export default function LatestJobs({ jobData }) {
         </h5>
       </div>
       <div>
-        <button>See Details</button>
+        <button onClick={()=> handleSeeDetails(jobData)}>See Details</button>
       </div>
     </div>
   );
