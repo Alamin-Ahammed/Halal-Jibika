@@ -26,6 +26,7 @@ export async function useAddToFav(docToBeAdded) {
     //   console.log(doc.data());
     // });
   } catch (error) {
+    console.log(error)
     toast.error("Error adding to favorites! Check If need to login", { autoClose: 2000 });
   }
 }

@@ -99,6 +99,7 @@ const Navbar = () => {
             <NavLink to="/contact">Contact</NavLink>
             <NavLink to="/favorites">My Favorite</NavLink>
             {!isSingedIn && <NavLink to="/signin">Sign In</NavLink>}
+            {isSingedIn && <NavLink to="/myjobpost">My Job Post</NavLink>}
             <NavLink to="/signup">Sign Up</NavLink>
           </div>
 

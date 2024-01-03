@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { MdFavorite } from "react-icons/md";
 import { useThemeContext } from "../../Context/themeContext";
-import './ShowDetailsOfAJob.css'
+import "./ShowDetailsOfAJob.css";
 import { useAddToFav } from "../../CustomHooks/useAddToFav";
-import { useIsThisAddedToFav } from "../../CustomHooks/useIsThisAddedToFav";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { db } from "../../config/firebase-config";
 
 export default function ShowDetailsOfAJob() {
-  // const {id,otherParams} = route.params;
+  const [isFavIconClicked, setIsFavIconClicked] = useState(false);
+  const [favourites, setFavourites] = useState([]);
   const { state } = useLocation();
   const { jobData } = state || {};
   const {
@@ -23,6 +25,32 @@ export default function ShowDetailsOfAJob() {
     Authoremail,
   } = jobData || {};
   const { theme } = useThemeContext();
+
+  const collectData = useCallback(async () => {
+    try {
+      const collectionRef = collection(db, 'favourites');
+      const q = query(
+        collectionRef,
+        where('uniqueID', '==', uniqueID)
+      );
+
+      const querySnapshot = await getDocs(q);
+
+      if (!querySnapshot.empty) {
+        const firstDoc = querySnapshot.docs[0];
+        setFavourites([firstDoc.data()]);
+      } else {
+        setFavourites([]);
+      }
+    } catch (error) {
+      console.error('Error querying document:', error);
+    }
+  }, [uniqueID]);
+
+  useEffect(() => {
+    collectData();
+  }, [isFavIconClicked, collectData,favourites]);
+
   return (
     <div style={{ minHeight: "70.8vh" }}>
       <div
@@ -34,7 +62,14 @@ export default function ShowDetailsOfAJob() {
             <img src={companyLogo} alt="Company Logo" />
             <h2>{jobTitle}</h2>
           </div>
-          <MdFavorite onClick={() => useAddToFav(jobData)} className="favIcon" />
+          <MdFavorite
+              onClick={() => {
+                useAddToFav(jobData);
+                setIsFavIconClicked(!isFavIconClicked)
+              }}
+              className="favIcon"
+              style={favourites.find((fav) => fav.uniqueID === uniqueID) ? {color:'red',boxShadow: 'rgba(184, 15, 15,0.7) 0px 8px 24px'} : {color:'rgba(90, 26, 26, 0.8)'}}
+            />
         </div>
         <div className="extraDetails">
           <p>{createdAtDateTime}</p>

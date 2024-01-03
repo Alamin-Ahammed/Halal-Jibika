@@ -12,8 +12,10 @@ import {
 import "./MyFavCard.css";
 import { db } from "../../config/firebase-config";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export default function MyFavCard({ jobData, deleteFunctions }) {
+  const navigate = useNavigate();
   const {
     jobTitle,
     createdAtDateTime,
@@ -27,9 +29,12 @@ export default function MyFavCard({ jobData, deleteFunctions }) {
     Authoruid,
   } = jobData;
   const {isDeleteClicked,setIsDeleteClicked} = deleteFunctions;
-  const { theme, setTheme } = useThemeContext();
+  const { theme } = useThemeContext();
 
-  const handleSeeDetails = () => {};
+  const handleSeeDetails = (jobData) => {
+    // its inner jobData variable because we are passing it in another function
+    navigate("/ShowDetailsOfAJob", { replace: true, state: { jobData } });
+  };
 
   const handleDelete = async (docToBeAdded) => {
     try {
@@ -48,7 +53,6 @@ export default function MyFavCard({ jobData, deleteFunctions }) {
       toast.error("Error removing form favorites:", { autoClose: 1000 });
     }
   };
-
 
   return (
     <div
