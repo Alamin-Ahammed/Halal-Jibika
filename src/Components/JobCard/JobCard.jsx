@@ -70,7 +70,6 @@ export default function JobCard({ jobData }) {
 
     collectData();
   }, [isFavIconClicked]);
-
   const handleApplyNow = () => {
     // // this jobData is coming from event handler not from the props
     navigate("/ApplyNow", { replace: true, state: { jobData } });
