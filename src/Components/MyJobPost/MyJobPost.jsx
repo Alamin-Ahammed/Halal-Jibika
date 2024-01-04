@@ -127,8 +127,8 @@ export default function MyJobPost({
           <div>
             <FaTrashAlt
               className="faTrash"
-              onClick={() => {
-                handleDeleteMyPost();
+              onClick={async () => {
+                await handleDeleteMyPost();
                 setIsDeleted(!isDeleted);
               }}
             />
