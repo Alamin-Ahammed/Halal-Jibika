@@ -109,7 +109,7 @@ const SignUp = () => {
       // Send verification email
       await sendEmailVerification(auth.currentUser);
       toast.warning(
-        "Verification email has been sent! you have 30 seconds to verify, otherwise account will be deleted.",
+        "Verification email has been sent! you have 60 seconds to verify, otherwise account will be deleted.",
         { autoclose: 1200 }
       );
 
@@ -179,7 +179,7 @@ const SignUp = () => {
             }
           }
         );
-      }, 30 * 1000);
+      }, 60 * 1000);
     } catch (error) {
       toast.error(error.message);
     }
