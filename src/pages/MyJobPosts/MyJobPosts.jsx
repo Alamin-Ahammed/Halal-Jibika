@@ -66,7 +66,7 @@ export default function MyJobPosts() {
           <p>Here are the Job Posts you have created.</p>
 
           <div className="myJobs">
-            {myJobPost.map((job) => (
+            {myJobPost.length === 0 ? <h2 style={{textAlign:"center",paddingTop:"10px"}}>No Job Posted Yet.</h2> :myJobPost.map((job) => (
               <MyJobPost key={job.createdAt} jobData={job} deleteJobs={{isDeleted,setIsDeleted}} />
             ))}
           </div>

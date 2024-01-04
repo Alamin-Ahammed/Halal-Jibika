@@ -60,7 +60,7 @@ export default function Favorite() {
         >
           <h1>My Favorites</h1>
           <div className="jobCards">
-            {myFavourites
+            {myFavourites.length === 0 ? <h2 style={{textAlign: 'center',padding:'20px'}}>No Favourites Added Yet!</h2> : myFavourites
               .sort((a, b) => b.createdAt - a.createdAt)
               .map((job) => (
                 <MyFavCard

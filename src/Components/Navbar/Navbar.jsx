@@ -14,6 +14,7 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../../config/firebase-config";
 import { useIsLoggedInContext } from "../../Context/IsLoggedInContext";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { MdClose } from "react-icons/md";
 
 const Navbar = () => {
   const { theme, setTheme } = useThemeContext();
@@ -46,14 +47,6 @@ const Navbar = () => {
   }, [theme]);
 
   const handleHamburgerMenu = () => {
-    // const navLinks = document.querySelector(".navLinks");
-    // if (!showMenu) {
-    //   // navLinks.style.display = "block";
-    //   navLinks.style.color = "green";
-    // } else {
-    //   // navLinks.style.display = "none";
-    //   navLinks.style.color = "red";
-    // }
     setShowMenu(!showMenu);
   };
 
@@ -174,8 +167,11 @@ const Navbar = () => {
               onClick={() => setTheme("dark")}
             />
           )}
+
+         
           <div className="bars-icon">
-            <FaBars
+            {
+              !showMenu && <FaBars
               onClick={handleHamburgerMenu}
               style={{
                 color: theme === "dark" ? "#fff" : "#000",
@@ -183,6 +179,16 @@ const Navbar = () => {
                 fontSize: "2rem",
               }}
             />
+            }
+            {
+              showMenu && <MdClose
+              onClick={()=> setShowMenu(!showMenu)}
+              style={{
+                color: theme === "dark" ? "#fff" : "#000",
+                cursor: "pointer",
+                fontSize: "2rem",
+              }} />
+            }
           </div>
           {showMenu && (
             <div
@@ -208,11 +214,11 @@ const Navbar = () => {
                   </div>
                 )}
               </div>
-              <NavLink to="/">Home</NavLink>
-              <NavLink to="/jobs">Jobs</NavLink>
-              <NavLink to="/about">About</NavLink>
-              <NavLink to="/contact">Contact</NavLink>
-              <NavLink to="/favorites">My Favorite</NavLink>
+              <NavLink onClick={()=> setShowMenu(!showMenu)} to="/">Home</NavLink>
+              <NavLink onClick={()=> setShowMenu(!showMenu)} to="/jobs">Jobs</NavLink>
+              <NavLink onClick={()=> setShowMenu(!showMenu)} to="/about">About</NavLink>
+              <NavLink onClick={()=> setShowMenu(!showMenu)} to="/contact">Contact</NavLink>
+              <NavLink onClick={()=> setShowMenu(!showMenu)} to="/favorites">My Favorite</NavLink>
               {isSingedIn && <NavLink to="/myjobpost">My Job Post</NavLink>}
               {isSingedIn && (
                 <button className="signoutBtn" onClick={handleSignOut}>
