@@ -74,6 +74,7 @@ const Footer = () => {
       <div className="footer-bottom">
         <p>&copy; 2023 Halal Jibika. All Rights Reserved.</p>
       </div>
+        <p style={{fontSize: '0.7rem',opacity: '0.7'}}>Developed by: Alamin Ahammed</p>
     </div>
   );
 };
