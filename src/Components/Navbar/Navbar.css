@@ -22,7 +22,7 @@
 .navbar a {
     color: white;
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: clamp(0.7rem, 1.5vw, 1rem);
     transition: all 0.3s;
     padding: 0.5rem 1rem;
     display: inline-flex;

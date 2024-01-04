@@ -1,0 +1,8 @@
+.editForm {
+    max-width: 500px;
+    margin: auto;
+}
+
+#jobDescription {
+    line-height: 1.2;
+}

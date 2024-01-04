@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { MdFavorite } from "react-icons/md";
 import { useThemeContext } from "../../Context/themeContext";
 import "./ShowDetailsOfAJob.css";
@@ -11,6 +11,7 @@ export default function ShowDetailsOfAJob() {
   const [isFavIconClicked, setIsFavIconClicked] = useState(false);
   const [favourites, setFavourites] = useState([]);
   const { state } = useLocation();
+  const navigate = useNavigate();
   const { jobData } = state || {};
   const {
     companyLogo,
@@ -51,6 +52,11 @@ export default function ShowDetailsOfAJob() {
     collectData();
   }, [isFavIconClicked, collectData,favourites]);
 
+  const handleApplyNow = () => {
+    // // this jobData is coming from event handler not from the props
+    navigate("/ApplyNow", { replace: true, state: { jobData } });
+  }
+
   return (
     <div style={{ minHeight: "70.8vh" }}>
       <div
@@ -79,7 +85,7 @@ export default function ShowDetailsOfAJob() {
           <p className="jobDescription">Job Description: {jobDescription}</p>
           <p>Author Email: {Authoremail}</p>
           <div className="detailsBtn">
-            <button>Apply Now</button>
+            <button onClick={handleApplyNow}>Apply Now</button>
           </div>
         </div>
       </div>

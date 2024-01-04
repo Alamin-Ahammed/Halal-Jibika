@@ -10,6 +10,7 @@ import SignUp from "../pages/Sign-Up/SingUp";
 import SignIn from "../pages/SignIn/SignIn";
 import ShowDetailsOfAJob from "../pages/ShowDetailsOfAJob/ShowDetailsOfAJob";
 import MyJobPosts from "../pages/MyJobPosts/MyJobPosts";
+import ApplyNowForm from "../pages/ApplyNow/ApplyNowForm";
 
 export const routes = createBrowserRouter([
     {
@@ -51,6 +52,10 @@ export const routes = createBrowserRouter([
             {
                 path: 'myjobpost',
                 element: <MyJobPosts />
+            },
+            {
+                path: 'applynow',
+                element: <ApplyNowForm />
             },
         ]
     },

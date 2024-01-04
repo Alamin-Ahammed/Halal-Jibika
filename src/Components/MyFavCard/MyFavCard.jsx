@@ -54,6 +54,11 @@ export default function MyFavCard({ jobData, deleteFunctions }) {
     }
   };
 
+  const handleApplyNow = () => {
+    // // this jobData is coming from event handler not from the props
+    navigate("/ApplyNow", { replace: true, state: { jobData } });
+  }
+
   return (
     <div
       className="jobCard"
@@ -80,7 +85,7 @@ export default function MyFavCard({ jobData, deleteFunctions }) {
         <p>Company Name: {companyName}</p>
         <p>Job Position: {jobPosition}</p>
         <div className="detailsBtn">
-          <button>Apply Now</button>
+          <button onClick={handleApplyNow}>Apply Now</button>
           <button
             // here directly passing the values for optimazation purpose
             onClick={() =>

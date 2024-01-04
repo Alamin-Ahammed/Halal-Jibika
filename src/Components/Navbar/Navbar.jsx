@@ -14,6 +14,7 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../../config/firebase-config";
 import { useIsLoggedInContext } from "../../Context/IsLoggedInContext";
 
+
 const Navbar = () => {
   const { theme, setTheme } = useThemeContext();
   const { isSingedIn, setIsSingedIn } = useIsLoggedInContext();
@@ -98,9 +99,10 @@ const Navbar = () => {
             <NavLink to="/about">About</NavLink>
             <NavLink to="/contact">Contact</NavLink>
             <NavLink to="/favorites">My Favorite</NavLink>
-            {!isSingedIn && <NavLink to="/signin">Sign In</NavLink>}
             {isSingedIn && <NavLink to="/myjobpost">My Job Post</NavLink>}
-            <NavLink to="/signup">Sign Up</NavLink>
+            {!isSingedIn && <NavLink to="/signin">Sign In</NavLink>}
+            {!isSingedIn && <NavLink to="/signup">Sign Up</NavLink>}
+
           </div>
 
           {isSingedIn && <button className="signoutBtn" onClick={handleSignOut}>Sign Out</button>}

@@ -7,8 +7,6 @@ import { useNavigate } from "react-router-dom";
 import { useAddToFav } from "../../CustomHooks/useAddToFav";
 import { auth, db } from "../../config/firebase-config";
 import { collection, getDocs, query, where } from "firebase/firestore";
-import { useIsThisAddedToFav } from "../../CustomHooks/useIsThisAddedToFav";
-import { toast } from "react-toastify";
 
 export default function JobCard({ jobData }) {
   const {
@@ -24,7 +22,7 @@ export default function JobCard({ jobData }) {
     Authoremail,
   } = jobData;
 
-  const [isFavIconClicked,setIsFavIconClicked] = useState(false);
+  const [isFavIconClicked, setIsFavIconClicked] = useState(false);
   const [favourites, setfavourites] = useState([]);
   const { theme } = useThemeContext();
   const navigate = useNavigate();
@@ -73,6 +71,11 @@ export default function JobCard({ jobData }) {
     collectData();
   }, [isFavIconClicked]);
 
+  const handleApplyNow = () => {
+    // // this jobData is coming from event handler not from the props
+    navigate("/ApplyNow", { replace: true, state: { jobData } });
+  }
+
   return (
     <div>
       <div
@@ -94,25 +97,36 @@ export default function JobCard({ jobData }) {
                   jobTitle,
                   companyName,
                   jobDescription,
-                  createdAtDateTime: getLocalTimeFromSeconds((timestamp.seconds)||0),
+                  createdAtDateTime: getLocalTimeFromSeconds(
+                    timestamp.seconds || 0
+                  ),
                   createdAt,
                   favUserUID: auth.currentUser.uid,
                   uniqueID: auth.currentUser.uid + createdAt,
                   Authoremail,
                 });
-                setIsFavIconClicked(!isFavIconClicked)
+                setIsFavIconClicked(!isFavIconClicked);
               }}
               className="favIcon"
-              style={favourites.find((fav) => fav.uniqueID === uniqueID) ? {color:'red',boxShadow: 'rgba(184, 15, 15,0.7) 0px 8px 24px'} : {color:'rgba(90, 26, 26, 0.8)'}}
+              style={
+                favourites.find((fav) => fav.uniqueID === uniqueID)
+                  ? {
+                      color: "red",
+                      boxShadow: "rgba(184, 15, 15,0.7) 0px 8px 24px",
+                    }
+                  : { color: "rgba(90, 26, 26, 0.8)" }
+              }
             />
           </div>
         </div>
         <div className="extraDetails">
-          <small>Posted At: {getLocalTimeFromSeconds((timestamp.seconds || 0))}</small>
+          <small>
+            Posted At: {getLocalTimeFromSeconds(timestamp.seconds || 0)}
+          </small>
           <p>Company Name: {companyName}</p>
           <p>Job Position: {jobPosition}</p>
           <div className="detailsBtn">
-            <button>Apply Now</button>
+            <button onClick={handleApplyNow}>Apply Now</button>
             <button
               // here directly passing the values for optimazation purpose
               onClick={() =>

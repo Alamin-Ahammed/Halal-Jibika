@@ -145,10 +145,7 @@ const SignUp = () => {
       });
 
       // Clear form fields
-      e.target.fullName.value = "";
-      e.target.email.value = "";
-      e.target.password.value = "";
-      e.target.confirmPassword.value = "";
+      e.target.reset()
 
       let reNavigate;
       reNavigate = setInterval(() => {
