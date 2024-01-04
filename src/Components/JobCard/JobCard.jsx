@@ -88,25 +88,31 @@ export default function JobCard({ jobData }) {
             <h2>{jobTitle}</h2>
           </div>
           <div>
+            {/*Here is adding to favourites */}
             <MdFavorite
-              onClick={() => {
-                useAddToFav({
-                  companyLogo,
-                  jobPosition,
-                  Authoruid,
-                  jobTitle,
-                  companyName,
-                  jobDescription,
-                  createdAtDateTime: getLocalTimeFromSeconds(
-                    timestamp.seconds || 0
-                  ),
-                  createdAt,
-                  favUserUID: auth.currentUser.uid,
-                  uniqueID: auth.currentUser.uid + createdAt,
-                  Authoremail,
-                });
-                setIsFavIconClicked(!isFavIconClicked);
+              onClick={async () => {
+                try {
+                  await useAddToFav({
+                    companyLogo,
+                    jobPosition,
+                    Authoruid,
+                    jobTitle,
+                    companyName,
+                    jobDescription,
+                    createdAtDateTime: getLocalTimeFromSeconds(
+                      timestamp.seconds || 0
+                    ),
+                    createdAt,
+                    favUserUID: auth.currentUser.uid,
+                    uniqueID: auth.currentUser.uid + createdAt,
+                    Authoremail,
+                  });
+                  setIsFavIconClicked(!isFavIconClicked);
+                } catch (error) {
+                  console.log(error);
+                }
               }}
+            
               className="favIcon"
               style={
                 favourites.find((fav) => fav.uniqueID === uniqueID)
