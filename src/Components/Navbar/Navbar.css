@@ -13,7 +13,7 @@
 }
 
 .logo {
-    width: 90px;
+    width: clamp(50px, 6vw, 90px);
     cursor: pointer;
 }
 
@@ -182,7 +182,7 @@
 
 @media screen and (max-width: 768px) {
     .navbar-container {
-        padding-inline: 2rem;
+        padding-inline: clamp(0.7rem, 3vw, 1rem);
     }
     .navbar {
         position: relative;
