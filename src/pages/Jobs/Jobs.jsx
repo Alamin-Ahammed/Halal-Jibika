@@ -15,23 +15,12 @@ import { useIsLoggedInContext } from "../../Context/IsLoggedInContext";
 import { useNavigate } from "react-router-dom";
 
 export default function Jobs() {
-  const { theme, setTheme } = useThemeContext();
-  const { isSingedIn, setIsSingedIn } = useIsLoggedInContext();
+  const { theme } = useThemeContext();
+  const { isSingedIn } = useIsLoggedInContext();
   const [isPostClicked, setIsPostClicked] = useState(false);
   const navigate = useNavigate();
   const [allJobs, setAllJobs] = useState([]);
   const [isNeedRender, setIsNeedRender] = useState(false);
-  // const {
-  //   companyLogo,
-  //   jobPosition,
-  //   Authoruid,
-  //   jobTitle,
-  //   companyName,
-  //   jobDescription,
-  //   timestamp,
-  //   createdAt,
-  //   Authoremail,
-  // } = allJobs;
 
   const handlePostJob = () => {
     setIsPostClicked(!isPostClicked);
@@ -58,7 +47,7 @@ export default function Jobs() {
     ) {
       try {
         const createAtMiliSec = Date.now();
-        const docRef = await addDoc(collection(db, "allJobs"), {
+         await addDoc(collection(db, "allJobs"), {
           ...job,
           Authoruid: uid,
           Authoremail: email,

@@ -13,7 +13,7 @@ export const TimeDelayCalculation = (timestamp) => {
   
     for (const [unit, secondsInUnit] of Object.entries(intervals)) {
       const intervalCount = Math.floor(seconds / secondsInUnit);
-      if (intervalCount >= 1) {
+      if (intervalCount >= 10) {
         return `${intervalCount} ${unit}${intervalCount > 1 ? "s" : ""} ago`;
       }
     }

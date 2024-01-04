@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useThemeContext } from "../../Context/themeContext";
-import { Link } from "react-router-dom";
 import { db } from "../../config/firebase-config";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { useIsLoggedInContext } from "../../Context/IsLoggedInContext";
@@ -33,7 +32,7 @@ export default function MyJobPosts() {
 
         const querySnapshot = await getDocs(q);
 
-        // you can query the collection to get the data of the document
+        // here you can query the collection to get the data of the document
         const dataArray = [];
         querySnapshot.forEach((doc) => {
           dataArray.push({
@@ -48,7 +47,6 @@ export default function MyJobPosts() {
     }
   }, [isDeleted]);
 
-  // console.log(myJobPost)
 
   return (
     <div

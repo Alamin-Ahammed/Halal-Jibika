@@ -1,7 +1,7 @@
 import "./Navbar.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import { IoIosSunny, IoIosMoon } from "react-icons/io";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { FaBars } from "react-icons/fa";
 import { useThemeContext } from "../../Context/themeContext";
 import logo3 from "../../assets/logo3.png";
 import logo from "../../assets/halal_jibika_logo.png";
@@ -87,7 +87,6 @@ const Navbar = () => {
     <div className="bg-container">
       <div className="navbar-container">
         <img className="logo" src={logo3} alt="Halal Job" />
-        {/* <h1 style={{color: '#f58020',fontSize: '1.5rem'}}>HALAL JIBIKA</h1> */}
         <div className="navbar" onLoad={ThemeChanger("navLinks", "className")}>
           <div className="navLinks">
             <NavLink to="/">Home</NavLink>
