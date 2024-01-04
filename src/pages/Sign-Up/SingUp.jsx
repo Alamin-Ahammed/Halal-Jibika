@@ -1,9 +1,12 @@
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
+  GithubAuthProvider,
+  GoogleAuthProvider,
   createUserWithEmailAndPassword,
   sendEmailVerification,
   signInWithEmailAndPassword,
+  signInWithPopup,
   updateProfile,
 } from "firebase/auth";
 import {
@@ -17,6 +20,8 @@ import { toast } from "react-toastify";
 import "./SignUp.css";
 import Cookies from "universal-cookie";
 import { useIsLoggedInContext } from "../../Context/IsLoggedInContext";
+import { FaGoogle } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa6";
 
 const SignUp = () => {
   const cookies = new Cookies(null);
@@ -50,7 +55,7 @@ const SignUp = () => {
         return nameRegex.test(name);
       };
 
-      console.log(isValidName(name))
+      console.log(isValidName(name));
 
       if (!name.trim() || !isValidName(name)) {
         errors.name = "Valid Name is required";
@@ -145,7 +150,7 @@ const SignUp = () => {
       });
 
       // Clear form fields
-      e.target.reset()
+      e.target.reset();
 
       let reNavigate;
       reNavigate = setInterval(() => {
@@ -185,6 +190,35 @@ const SignUp = () => {
     }
   };
 
+  const handleGoogleSignIn = async () => {
+    try {
+      const provider = new GoogleAuthProvider();
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      const { displayName, email, photoURL, uid } = user;
+      cookies.set("authInfo", { displayName, email, photoURL, uid });
+      toast.success('Sign up with Google is Successful!', { autoClose: 1000 });
+      setIsSingedIn(true);
+      navigate("/");
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
+  const handleGithubSignIn = async () => {
+    try {
+      const provider = new GithubAuthProvider();
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      const { displayName, email, photoURL, uid } = user;
+      cookies.set("authInfo", { displayName, email, photoURL, uid });
+      setIsSingedIn(true);
+      navigate("/");
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
   return (
     <div className="signup-container">
       <h2>Sign Up</h2>
@@ -215,6 +249,12 @@ const SignUp = () => {
       <p>
         Already have an account? <Link to="/signin">Sign In</Link>
       </p>
+      <p style={{ textAlign: "center" }}>Or</p>
+      <p style={{ textAlign: "center" }}>Sign In With Google Or Github</p>
+      <div className="otherAuthentications">
+        <FaGoogle className="fagoogle" onClick={handleGoogleSignIn} />
+        <FaGithub className="faGithub" onClick={handleGithubSignIn}/>
+      </div>
     </div>
   );
 };

@@ -1,11 +1,13 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { GithubAuthProvider, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import "./SignIn.css";
 import Cookies from "universal-cookie";
 import { auth } from "../../config/firebase-config";
 import { toast } from "react-toastify";
 import { useIsLoggedInContext } from "../../Context/IsLoggedInContext";
+import { FaGoogle } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa6";
 
 const SignIn = () => {
   const { setIsSingedIn } = useIsLoggedInContext();
@@ -58,6 +60,37 @@ const SignIn = () => {
       });
     }
   };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      const provider = new GoogleAuthProvider();
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      const { displayName, email, photoURL, uid } = user;
+      cookies.set("authInfo", { displayName, email, photoURL, uid });
+      toast.success('Sign up with Google is Successful!', { autoClose: 1000 });
+      setIsSingedIn(true);
+      navigate("/");
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
+  const handleGithubSignIn = async () => {
+    try {
+      const provider = new GithubAuthProvider();
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      const { displayName, email, photoURL, uid } = user;
+      cookies.set("authInfo", { displayName, email, photoURL, uid });
+      setIsSingedIn(true);
+      navigate("/");
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
+
   return (
     <div className="signin-container">
       <h2>Sign In</h2>
@@ -74,6 +107,12 @@ const SignIn = () => {
       <p>
         Don't have an account? <Link to="/signup">Sign Up</Link>
       </p>
+      <p style={{ textAlign: "center" }}>Or</p>
+      <p style={{ textAlign: "center" }}>Sign In With Google Or Github</p>
+      <div className="otherAuthentications">
+        <FaGoogle className="fagoogle" onClick={handleGoogleSignIn} />
+        <FaGithub className="faGithub" onClick={handleGithubSignIn}/>
+      </div>
     </div>
   );
 };

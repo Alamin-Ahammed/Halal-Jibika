@@ -56,3 +56,26 @@
     text-decoration: underline;
   }
   
+
+  .otherAuthentications {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    font-size: 3rem;
+  }
+
+  .fagoogle, .faGithub {
+    color: rgb(26, 25, 25);
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .fagoogle:hover {
+    color: #e16b1a;
+  }
+
+  .faGithub:hover {
+    color: #000;
+  }
