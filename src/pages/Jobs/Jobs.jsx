@@ -95,14 +95,18 @@ export default function Jobs() {
       }}
       className="jobs-main-container"
     >
-      <div className="post-jobs-container">
-        {isSingedIn ? (
+      <div className="post-job-container" style={{border: theme === "dark" ? "1px solid #fff" : "1px solid #15365b"}}>
+      <h2 className="postJobHeading" style={{ color: theme === "dark" ? "#fff" : "#15365b"}}>Wanna Post A Job? Click Below...</h2>
+      {isSingedIn ? (
           <button className="post-job" onClick={handlePostJob}>
             Post A Job
           </button>
         ) : (
           "Login to Post A Job!"
         )}
+      </div>
+      <div className="post-jobs-container">
+        
         {isPostClicked && (
           <div className="form-container">
             <form onSubmit={handleJobPostSubmition}>

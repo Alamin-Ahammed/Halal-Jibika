@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { MdFavorite } from "react-icons/md";
 import "./JobCard.css";
-import { ThemeChanger } from "../../CustomHooks/ThemeChanger";
 import { useThemeContext } from "../../Context/themeContext";
 import { useNavigate } from "react-router-dom";
 import { useAddToFav } from "../../CustomHooks/useAddToFav";

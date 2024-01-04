@@ -82,6 +82,17 @@
     padding: 20px;
   }
 
+  .post-job-container {
+    /* padding-bottom: 0.5rem; */
+    /* margin-bottom: clamp(0.3rem,1vw,1rem); */
+  }
+
+  .postJobHeading {
+    font-size: clamp(1rem, 1.5vw, 1.5rem);
+    /* padding: clamp(0.3rem, 1vw, 1rem); */
+    text-align: center;
+  }
+
 
   @media screen and (min-width: 768px) {
     .all-jobs-container {
