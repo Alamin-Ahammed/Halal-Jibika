@@ -63,19 +63,23 @@
     align-items: center;
     gap: 1rem;
     padding: 1rem;
-    font-size: 3rem;
   }
 
   .fagoogle, .faGithub {
     color: rgb(26, 25, 25);
     cursor: pointer;
     transition: all 0.3s;
+    padding: 1rem;
+    border-radius: 50%;
+    font-size: 4.5rem;
   }
 
   .fagoogle:hover {
     color: #e16b1a;
+    background-color: rgba(0, 0, 0, 0.4);
   }
 
   .faGithub:hover {
     color: #000;
+    background-color: rgba(0, 0, 0, 0.4);
   }
