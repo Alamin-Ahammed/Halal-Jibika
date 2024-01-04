@@ -71,8 +71,8 @@ export default function MyFavCard({ jobData, deleteFunctions }) {
         </div>
         <div>
           <div
-            onClick={() => {
-              handleDelete(jobData);
+            onClick={async () => {
+              await handleDelete(jobData);
               setIsDeleteClicked(!isDeleteClicked);
             }}
           >
