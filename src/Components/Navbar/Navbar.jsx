@@ -13,12 +13,13 @@ import { toast } from "react-toastify";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../../config/firebase-config";
 import { useIsLoggedInContext } from "../../Context/IsLoggedInContext";
-
+import { BsThreeDotsVertical } from "react-icons/bs";
 
 const Navbar = () => {
   const { theme, setTheme } = useThemeContext();
   const { isSingedIn, setIsSingedIn } = useIsLoggedInContext();
   const [showMenu, setShowMenu] = useState(false);
+  const [isThreeDotsClicked, setIsThreeDotsClicked] = useState(false);
   const navigate = useNavigate();
   const cookies = new Cookies(null);
   const { displayName, photoURL, email } = cookies.get("authInfo") || {};
@@ -45,12 +46,14 @@ const Navbar = () => {
   }, [theme]);
 
   const handleHamburgerMenu = () => {
-    const navLinks = document.querySelector(".navLinks");
-    if (!showMenu) {
-      navLinks.style.display = "block";
-    } else {
-      navLinks.style.display = "none";
-    }
+    // const navLinks = document.querySelector(".navLinks");
+    // if (!showMenu) {
+    //   // navLinks.style.display = "block";
+    //   navLinks.style.color = "green";
+    // } else {
+    //   // navLinks.style.display = "none";
+    //   navLinks.style.color = "red";
+    // }
     setShowMenu(!showMenu);
   };
 
@@ -102,18 +105,64 @@ const Navbar = () => {
             {isSingedIn && <NavLink to="/myjobpost">My Job Post</NavLink>}
             {!isSingedIn && <NavLink to="/signin">Sign In</NavLink>}
             {!isSingedIn && <NavLink to="/signup">Sign Up</NavLink>}
-
+            {isSingedIn && (
+              <BsThreeDotsVertical
+                onClick={() => setIsThreeDotsClicked(!isThreeDotsClicked)}
+                className="three-dots"
+              />
+            )}
           </div>
 
-          {isSingedIn && <button className="signoutBtn" onClick={handleSignOut}>Sign Out</button>}
-          {isSingedIn && (
-            <div className="profile-container">
-              <div className="profile">
-                <img src={photoURL} alt="logo" />
-              </div>
-              <h6 style={{ color: theme === "dark" ? "#fff" : "#000" }}>{displayName}</h6>
+          {/* for small screens */}
+          <div className="small-screenLinks">
+            {!isSingedIn && (
+              <NavLink id="small-screen-signin" to="/signin">
+                Sign In
+              </NavLink>
+            )}
+            {!isSingedIn && (
+              <NavLink id="small-screen-signup" to="/signup">
+                Sign Up
+              </NavLink>
+            )}
+          </div>
+
+          {isSingedIn && isThreeDotsClicked && (
+            <div
+              className="dropdown"
+              style={
+                theme === "dark"
+                  ? { backgroundColor: "#15365b" }
+                  : { backgroundColor: "#fff" }
+              }
+            >
+              {isSingedIn && (
+                <div className="profile-container">
+                  <div className="profile">
+                    <img src={photoURL} alt="logo" />
+                  </div>
+                  <h5 style={{ color: theme === "dark" ? "#fff" : "#000" }}>
+                    {displayName}
+                  </h5>
+                  <i
+                    style={{
+                      color: theme === "dark" ? "#fff" : "#000",
+                      fontSize: "0.8rem",
+                      marginBottom: "0.5rem",
+                    }}
+                  >
+                    {email}
+                  </i>
+                </div>
+              )}
+              {isSingedIn && (
+                <button className="signoutBtn" onClick={handleSignOut}>
+                  Sign Out
+                </button>
+              )}
             </div>
           )}
+
           {theme === "dark" ? (
             <IoIosSunny
               style={{ color: "#f58020", cursor: "pointer", fontSize: "2rem" }}
@@ -135,6 +184,43 @@ const Navbar = () => {
               }}
             />
           </div>
+          {showMenu && (
+            <div
+              id="hamburger-menu-small-screen"
+              style={
+                theme === "dark"
+                  ? {
+                      backgroundColor: "#15365b",
+                      boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+                    }
+                  : { backgroundColor: "rgba(0,0,0,0.24)" }
+              }
+            >
+              <div className="hamburger-menu-small-screen-profile">
+                {isSingedIn && (
+                  <div className="profile-container">
+                    <div className="profile">
+                      <img src={photoURL} alt="logo" />
+                    </div>
+                    <h6 style={{ color: theme === "dark" ? "#fff" : "#000" }}>
+                      {displayName}
+                    </h6>
+                  </div>
+                )}
+              </div>
+              <NavLink to="/">Home</NavLink>
+              <NavLink to="/jobs">Jobs</NavLink>
+              <NavLink to="/about">About</NavLink>
+              <NavLink to="/contact">Contact</NavLink>
+              <NavLink to="/favorites">My Favorite</NavLink>
+              {isSingedIn && <NavLink to="/myjobpost">My Job Post</NavLink>}
+              {isSingedIn && (
+                <button className="signoutBtn" onClick={handleSignOut}>
+                  Sign Out
+                </button>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>

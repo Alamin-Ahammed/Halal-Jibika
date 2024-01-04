@@ -47,7 +47,7 @@ export default function LatestJobs({ jobData }) {
       <div className="newJobs-details">
         <i className="posted-time">Posted: {TimeDelayCalculation(createdAt)}</i>
         <h1>{jobTitle}</h1>
-        <h5>{jobDescription.slice(0, 50) + "......."}</h5>
+        <h5>{jobDescription.slice(0, 40) + "......."}</h5>
       </div>
       <div>
         <button

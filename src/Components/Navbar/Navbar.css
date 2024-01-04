@@ -8,6 +8,10 @@
     margin-inline: auto;
 }
 
+.three-dots {
+    color: white;
+}
+
 .logo {
     width: 90px;
     cursor: pointer;
@@ -88,6 +92,94 @@
     align-items: center;
 }
 
+.dropdown {
+    position: absolute;
+    right: 0.5rem;
+    top: 3.5rem;
+    padding: 1rem;
+    height: 160px;
+    min-width: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    animation: animate 0.2s linear;
+    overflow: hidden;
+    z-index: 11;
+    border-radius: 0.5rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+@keyframes animate {
+    0%{
+        height: 0;
+    }
+    100%{
+        height: 160px;
+    }
+}
+
+.profile-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#hamburger-menu-small-screen {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 3rem;
+    right: 0rem;
+    background-color: rgba(0, 0, 0, 0.24);
+    overflow: hidden;
+    animation: hamburger 0.3s linear;
+    height: 319px;
+    border-radius: 0.5rem;
+    z-index: 11;
+}
+
+#hamburger-menu-small-screen > * {
+    display: flex;
+    justify-content: center;
+    width: 240px;
+}
+
+.hamburger-menu-small-screen-profile{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    margin: 0.5rem 0.2rem;
+}
+
+@keyframes hamburger {
+    0%{
+        height: 0px;
+    }
+    100%{
+        height: 290px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .dropdown{
+        display: none;
+    }
+    #hamburger-menu-small-screen {
+        display: flex;
+    }
+}
+
+.small-screenLinks{
+    display: none;
+}
+
+.small-screenLinks > a {
+    padding: 0.3rem;
+}
+
+
 @media screen and (max-width: 768px) {
     .navbar-container {
         padding-inline: 2rem;
@@ -124,6 +216,14 @@
         100%{
             height: 250px;
         }
+    }
+
+    #small-screen-signin , #small-screen-signup{
+        display: block;
+    }
+
+    .small-screenLinks{
+        display: flex;
     }
 
     .bars-icon {
