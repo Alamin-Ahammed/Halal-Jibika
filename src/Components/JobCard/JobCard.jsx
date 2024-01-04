@@ -106,7 +106,7 @@ export default function JobCard({ jobData }) {
                     uniqueID: auth.currentUser.uid + createdAt,
                     Authoremail,
                   });
-                  setIsFavIconClicked(!isFavIconClicked);
+                  setIsFavIconClicked((prevIsFavIconClicked) => !prevIsFavIconClicked);
                 } catch (error) {
                   console.log(error);
                 }
