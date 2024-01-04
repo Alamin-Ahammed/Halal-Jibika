@@ -41,7 +41,7 @@
   .extraDetails > * {
     text-align: left;
     padding-left: 1rem;
-    line-height: 1.1;
+    line-height: 0.7;
   }
   
   .extraDetails > small {
