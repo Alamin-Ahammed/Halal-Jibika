@@ -14,3 +14,7 @@
     text-align: justify;
     padding: 1rem;
 }
+
+#authorEmail {
+    line-height: 1;
+}

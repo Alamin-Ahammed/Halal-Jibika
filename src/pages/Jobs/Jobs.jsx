@@ -53,7 +53,7 @@ export default function Jobs() {
           Authoremail: email,
           createdAt: createAtMiliSec,
           timestamp: serverTimestamp(),
-          uniqueID: auth.currentUser.uid+createAtMiliSec,
+          uniqueID: (auth.currentUser.uid || '')+createAtMiliSec,
         });
         toast.success("Job posted successfully!",{autoClose:1000});
         setIsPostClicked(!isPostClicked);
@@ -148,7 +148,7 @@ export default function Jobs() {
                   key={job.createdAt}
                   jobData={{
                     ...job,
-                    uniqueID: auth.currentUser.uid + job.createdAt,
+                    uniqueID: (auth.currentUser.uid || '') + job.createdAt,
                   }}
                 />
               ))}

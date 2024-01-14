@@ -220,6 +220,7 @@ const SignUp = () => {
   };
 
   return (
+    <>
     <div className="signup-container">
       <h2>Sign Up</h2>
       <form onSubmit={handleFormSubmit}>
@@ -256,6 +257,7 @@ const SignUp = () => {
         <FaGithub className="faGithub" onClick={handleGithubSignIn}/>
       </div>
     </div>
+    </>
   );
 };
 

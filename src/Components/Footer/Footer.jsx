@@ -13,8 +13,10 @@ import {
 import logo from "../../assets/halal_jibika_logo.png_1.png";
 import "./Footer.css";
 import { Link } from "react-router-dom";
+import { useIsLoggedInContext } from "../../Context/IsLoggedInContext";
 
 const Footer = () => {
+  const { isSingedIn } = useIsLoggedInContext();
   return (
     <div className="footer-container">
       <div className="footer-content">
@@ -38,12 +40,16 @@ const Footer = () => {
             <Link to="/favorites">
               <FaHeart />
             </Link>
-            <Link to="/signup">
-              <FaUser />
-            </Link>
-            <Link to="signout">
-              <FaSignOutAlt />
-            </Link>
+            {!isSingedIn && (
+              <>
+                <Link to="/signup">
+                  <FaUser />
+                </Link>
+                <Link to="signout">
+                  <FaSignOutAlt />
+                </Link>
+              </>
+            )}
           </div>
         </div>
         <div className="footer-social">
@@ -74,7 +80,9 @@ const Footer = () => {
       <div className="footer-bottom">
         <p>&copy; 2023 Halal Jibika. All Rights Reserved.</p>
       </div>
-        <p style={{fontSize: '0.7rem',opacity: '0.7'}}>Developed by: Alamin Ahammed</p>
+      <p style={{ fontSize: "0.7rem", opacity: "0.7" }}>
+        Developed by: Alamin Ahammed
+      </p>
     </div>
   );
 };

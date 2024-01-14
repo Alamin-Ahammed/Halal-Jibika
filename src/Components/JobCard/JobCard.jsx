@@ -156,9 +156,3 @@ export default function JobCard({ jobData }) {
     </div>
   );
 }
-
-/**
- * 
-        <p className="jobDescription">Job Description: {jobDescription}</p>
-        <p>Author Email: {Authoremail}</p>
- */
