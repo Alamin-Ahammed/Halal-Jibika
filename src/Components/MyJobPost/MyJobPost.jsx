@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaTrashAlt } from "react-icons/fa";
 import { useThemeContext } from "../../Context/themeContext";
 import {
@@ -81,40 +81,52 @@ export default function MyJobPost({
   };
 
   const handleUpdateSubmition = async (e) => {
+    e.preventDefault();
     const jobTitle = e.target.jobTitle.value;
     const jobPosition = e.target.jobPosition.value;
     const jobDescription = e.target.jobDescription.value;
-  
+
     const allJobsQuery = query(
       collection(db, "allJobs"),
       where("uniqueID", "==", uniqueID)
     );
+    console.log(jobTitle, jobPosition, jobDescription, uniqueID);
     const favJobsQuery = query(
       collection(db, "favourites"),
       where("uniqueID", "==", uniqueID)
     );
-  
+
     // Fetch data from the queries
     const allJobsSnapshot = await getDocs(allJobsQuery);
     const favJobsSnapshot = await getDocs(favJobsQuery);
-  
+
     // Get the document references from the snapshots
-    const updateDocFromAllJobsRef = doc(db, "allJobs", allJobsSnapshot.docs[0]?.id);
-    const updateDocFromFavJobsRef = doc(db, "favourites", favJobsSnapshot.docs[0]?.id);
-  
+    const updateDocFromAllJobsRef = doc(
+      db,
+      "allJobs",
+      allJobsSnapshot.docs[0]?.id
+    );
+    const updateDocFromFavJobsRef = doc(
+      db,
+      "favourites",
+      favJobsSnapshot.docs[0]?.id
+    );
+
     await updateDoc(updateDocFromFavJobsRef, {
       jobTitle,
       jobDescription,
       jobPosition,
     });
-  
+
     await updateDoc(updateDocFromAllJobsRef, {
       jobTitle,
       jobDescription,
       jobPosition,
     });
+    
+    setEdited(false);
   };
-  
+ 
 
   return (
     <div>

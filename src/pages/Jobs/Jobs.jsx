@@ -47,15 +47,15 @@ export default function Jobs() {
     ) {
       try {
         const createAtMiliSec = Date.now();
-         await addDoc(collection(db, "allJobs"), {
+        await addDoc(collection(db, "allJobs"), {
           ...job,
           Authoruid: uid,
           Authoremail: email,
           createdAt: createAtMiliSec,
           timestamp: serverTimestamp(),
-          uniqueID: (auth.currentUser.uid || '')+createAtMiliSec,
+          uniqueID: (auth.currentUser.uid || "") + createAtMiliSec,
         });
-        toast.success("Job posted successfully!",{autoClose:1000});
+        toast.success("Job posted successfully!", { autoClose: 1000 });
         setIsPostClicked(!isPostClicked);
         // clear form
         e.target.reset();
@@ -63,7 +63,7 @@ export default function Jobs() {
         console.error("Error adding document: ", e);
       }
     }
-    
+
     setIsNeedRender(!isNeedRender);
   };
 
@@ -82,7 +82,7 @@ export default function Jobs() {
 
   useEffect(() => {
     if (!isSingedIn) {
-      toast.warning("Please login first",{autoClose:1000});
+      toast.warning("Please login first", { autoClose: 1000 });
       navigate("/signin");
     }
   }, [isSingedIn]);
@@ -95,9 +95,19 @@ export default function Jobs() {
       }}
       className="jobs-main-container"
     >
-      <div className="post-job-container" style={{border: theme === "dark" ? "1px solid #fff" : "1px solid #15365b"}}>
-      <h2 className="postJobHeading" style={{ color: theme === "dark" ? "#fff" : "#15365b"}}>Wanna Post A Job? Click Below...</h2>
-      {isSingedIn ? (
+      <div
+        className="post-job-container"
+        style={{
+          border: theme === "dark" ? "1px solid #fff" : "1px solid #15365b",
+        }}
+      >
+        <h2
+          className="postJobHeading"
+          style={{ color: theme === "dark" ? "#fff" : "#15365b" }}
+        >
+          Wanna Post A Job? Click Below...
+        </h2>
+        {isSingedIn ? (
           <button className="post-job" onClick={handlePostJob}>
             Post A Job
           </button>
@@ -106,7 +116,6 @@ export default function Jobs() {
         )}
       </div>
       <div className="post-jobs-container">
-        
         {isPostClicked && (
           <div className="form-container">
             <form onSubmit={handleJobPostSubmition}>
@@ -148,7 +157,7 @@ export default function Jobs() {
                   key={job.createdAt}
                   jobData={{
                     ...job,
-                    uniqueID: (auth.currentUser.uid || '') + job.createdAt,
+                    uniqueID: (auth.currentUser.uid || "") + job.createdAt,
                   }}
                 />
               ))}

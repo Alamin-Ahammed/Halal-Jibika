@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   GithubAuthProvider,
@@ -54,8 +54,6 @@ const SignUp = () => {
         const nameRegex = /^[A-Za-z\s]+$/;
         return nameRegex.test(name);
       };
-
-      console.log(isValidName(name));
 
       if (!name.trim() || !isValidName(name)) {
         errors.name = "Valid Name is required";
@@ -180,7 +178,6 @@ const SignUp = () => {
               deleteObject(imageRef);
               userCredential.user.delete();
               clearInterval(reNavigate);
-              console.log("account deleted");
             }
           }
         );
